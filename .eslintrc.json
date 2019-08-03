@@ -18,7 +18,18 @@
         "react"
     ],
     "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "no-param-reassign": 0,
+      "no-console":0,
+      "comma-dangle":0,
+      "prefer-const": "error",
+      "no-var": "error",
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "indent": ["error", 2],
+      "react/prop-types": [0]
     },
     "extends": "airbnb"
 }
