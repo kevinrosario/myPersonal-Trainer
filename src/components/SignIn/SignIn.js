@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,10 +9,26 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from 'react-router-dom';
+import { withSnackbar } from 'notistack';
+import { connect } from 'react-redux';
+import { initiateSignIn } from '../../actions/user';
 import useStyles from './SignInStyles';
 
-export default function SignIn() {
+function SignIn({ dispatch, enqueueSnackbar }) {
   const classes = useStyles();
+  const [credentials, setCredentials] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = name => (event) => {
+    setCredentials({ ...credentials, [name]: event.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(initiateSignIn(credentials, enqueueSnackbar));
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -26,33 +42,36 @@ export default function SignIn() {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-            variant="outlined"
-            margin="normal"
             required
             fullWidth
+            autoFocus
+            variant="outlined"
+            margin="normal"
             id="email"
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
+            onChange={handleChange('email')}
           />
           <TextField
-            variant="outlined"
-            margin="normal"
             required
             fullWidth
+            variant="outlined"
+            margin="normal"
             name="password"
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange('password')}
           />
           <Button
-            type="submit"
             fullWidth
+            type="submit"
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
@@ -68,3 +87,7 @@ export default function SignIn() {
     </Container>
   );
 }
+
+const mapStateToProps = state => ({ user: state.user });
+
+export default connect(mapStateToProps)(withSnackbar(SignIn));

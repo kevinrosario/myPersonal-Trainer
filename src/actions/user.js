@@ -1,6 +1,7 @@
 import {
   signIn, signUp, changePassword, signOut
 } from '../api/auth';
+import messages from '../messages/messages';
 
 const signInRequest = () => ({
   type: 'SIGNIN_REQUEST'
@@ -9,26 +10,19 @@ const signInRequest = () => ({
 const signInSuccess = response => ({
   type: 'SIGNIN_SUCCESS',
   user: response.data.user,
-  alert: {
-    type: 'success',
-    heading: 'Success',
-    message: 'You\'re signed in... Enjoy!'
-  }
+  workouts: response.data.workouts
 });
 
 const signInFailure = () => ({
-  type: 'SIGNIN_FAILURE',
-  alert: {
-    type: 'danger',
-    heading: 'Error',
-    message: 'Something went wrong while trying to sign you in... Try again.'
-  }
+  type: 'SIGNIN_FAILURE'
 });
 
-export const initiateSignIn = credentials => (dispatch) => {
+export const initiateSignIn = (credentials, enqueueSnackbar) => (dispatch) => {
+  console.log('User action', credentials);
   dispatch(signInRequest());
   return signIn(credentials)
     .then((response) => {
+      enqueueSnackbar(messages.signInSuccess, { variant: 'success' });
       dispatch(signInSuccess(response));
     })
     .catch(() => dispatch(signInFailure()));
@@ -40,28 +34,18 @@ const signUpRequest = () => ({
 
 const signUpSuccess = response => ({
   type: 'SIGNUP_SUCCESS',
-  user: response.data.user,
-  alert: {
-    type: 'success',
-    heading: 'Success',
-    message: 'You signed up successfully and we logged you in!'
-  }
+  user: response.data.user
 });
 
 const signUpFailure = () => ({
-  type: 'SIGNUP_FAILURE',
-  alert: {
-    type: 'danger',
-    heading: 'Error',
-    message: 'Something went wrong while trying to sign you up... Try again.'
-  }
+  type: 'SIGNUP_FAILURE'
 });
 
-export const initiateSignUp = credentials => (dispatch) => {
+export const initiateSignUp = (credentials, enqueueSnackbar) => (dispatch) => {
   dispatch(signUpRequest());
   return signUp(credentials)
     .then((res) => {
-      console.log(res);
+      console.log(res, enqueueSnackbar);
       dispatch(signInRequest());
       return signIn(credentials)
         .then((response) => {
@@ -77,21 +61,11 @@ const changePasswordRequest = () => ({
 });
 
 const changePasswordFailure = () => ({
-  type: 'CHANGEPW_FAILURE',
-  alert: {
-    type: 'danger',
-    heading: 'Error',
-    message: 'Something went wrong while trying to change your password... Try again.'
-  }
+  type: 'CHANGEPW_FAILURE'
 });
 
 const changePasswordSuccess = () => ({
-  type: 'CHANGEPW_SUCCESS',
-  alert: {
-    type: 'success',
-    heading: 'Success',
-    message: 'Your password is changed!'
-  }
+  type: 'CHANGEPW_SUCCESS'
 });
 
 export const initiateChangePassword = (passwords, user) => (dispatch) => {
@@ -102,23 +76,12 @@ export const initiateChangePassword = (passwords, user) => (dispatch) => {
 };
 
 const signOutFailure = () => ({
-  type: 'SIGNOUT_FAILURE',
-  alert: {
-    type: 'danger',
-    heading: 'Error',
-    message: 'Something went wrong during sign out... Try again.'
-  }
+  type: 'SIGNOUT_FAILURE'
 });
 
 const signOutSuccess = () => ({
-  type: 'SIGNOUT_SUCCESS',
-  alert: {
-    type: 'info',
-    heading: 'You\'ve signed out',
-    message: 'We\'ll miss you... comeback soon'
-  }
+  type: 'SIGNOUT_SUCCESS'
 });
-
 
 export const initiateSignOut = user => (dispatch) => {
   signOut(user)

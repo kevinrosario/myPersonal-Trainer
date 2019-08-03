@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,23 @@ import useStyles from './SignUpStyles';
 
 export default function SignUp() {
   const classes = useStyles();
+
+  const [credentials, setCredentials] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordConfirmation: ''
+  });
+
+  const handleChange = name => (event) => {
+    setCredentials({ ...credentials, [name]: event.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(credentials);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -37,6 +54,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={handleChange('firstName')}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -48,6 +66,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={handleChange('lastName')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -59,6 +78,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handleChange('email')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -71,6 +91,20 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange('password')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="passwordConfirmation"
+                label="Password Confirmation"
+                type="password"
+                id="passwordConfirmation"
+                autoComplete="current-password"
+                onChange={handleChange('passwordConfirmation')}
               />
             </Grid>
           </Grid>
@@ -80,6 +114,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
