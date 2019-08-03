@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mypersonal-trainer/static/css/main.19941eeb.chunk.css",
+    "main.js": "/mypersonal-trainer/static/js/main.75339b97.chunk.js",
+    "main.js.map": "/mypersonal-trainer/static/js/main.75339b97.chunk.js.map",
+    "runtime~main.js": "/mypersonal-trainer/static/js/runtime~main.ba16c41b.js",
+    "runtime~main.js.map": "/mypersonal-trainer/static/js/runtime~main.ba16c41b.js.map",
+    "static/js/2.3310f33a.chunk.js": "/mypersonal-trainer/static/js/2.3310f33a.chunk.js",
+    "static/js/2.3310f33a.chunk.js.map": "/mypersonal-trainer/static/js/2.3310f33a.chunk.js.map",
+    "index.html": "/mypersonal-trainer/index.html",
+    "precache-manifest.3d9f2820a7451e32fc5d0b1d464905c3.js": "/mypersonal-trainer/precache-manifest.3d9f2820a7451e32fc5d0b1d464905c3.js",
+    "service-worker.js": "/mypersonal-trainer/service-worker.js",
+    "static/css/main.19941eeb.chunk.css.map": "/mypersonal-trainer/static/css/main.19941eeb.chunk.css.map"
+  }
+}
