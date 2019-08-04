@@ -11,6 +11,9 @@ const status = (state = '', action) => {
   case 'CHANGEPW_FAILURE':
   case 'SIGNOUT_SUCCESS':
   case 'SIGNOUT_FAILURE':
+  case 'FETCH_WORKOUT_REQUEST':
+  case 'FETCH_WORKOUT_SUCCESS':
+  case 'FETCH_WORKOUT_FAILURE':
     return action.type;
   case 'RESET_STATUS':
     return '';

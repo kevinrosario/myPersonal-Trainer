@@ -8,7 +8,11 @@ export const signUp = credentials => axios({
     credentials: {
       email: credentials.email,
       password: credentials.password,
-      password_confirmation: credentials.passwordConfirmation
+      password_confirmation: credentials.passwordConfirmation,
+      firstName: credentials.firstName,
+      lastName: credentials.lastName,
+      height: credentials.height,
+      weight: credentials.weight
     }
   }
 });

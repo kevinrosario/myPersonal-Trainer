@@ -2,6 +2,7 @@ import {
   signIn, signUp, changePassword, signOut
 } from '../api/auth';
 import messages from '../messages/messages';
+import { workoutsRequestSuccess, workoutsRequestFailure } from './workouts';
 
 const signInRequest = () => ({
   type: 'SIGNIN_REQUEST'
@@ -9,8 +10,7 @@ const signInRequest = () => ({
 
 const signInSuccess = response => ({
   type: 'SIGNIN_SUCCESS',
-  user: response.data.user,
-  workouts: response.data.workouts
+  user: response.data.user
 });
 
 const signInFailure = () => ({
@@ -18,13 +18,18 @@ const signInFailure = () => ({
 });
 
 export const initiateSignIn = (credentials, enqueueSnackbar, history) => (dispatch) => {
-  console.log('User action', credentials);
   dispatch(signInRequest());
   return signIn(credentials)
-    .then(response => dispatch(signInSuccess(response)))
+    .then((response) => {
+      dispatch(signInSuccess(response)); // add user to state
+      dispatch(workoutsRequestSuccess(response)); // add workouts to state
+    })
     .then(() => enqueueSnackbar(messages.signInSuccess, { variant: 'success' }))
     .then(() => history.push('/home'))
-    .catch(() => dispatch(signInFailure()));
+    .catch(() => {
+      dispatch(signInFailure());
+      dispatch(workoutsRequestFailure());
+    });
 };
 
 const signUpRequest = () => ({

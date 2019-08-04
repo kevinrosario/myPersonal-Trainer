@@ -14,8 +14,7 @@ import { connect } from 'react-redux';
 import { initiateSignUp } from '../../actions/user';
 import useStyles from './SignUpStyles';
 
-
-function SignUp({ dispatch, history, enqueueSnackbar }) {
+function SignUp({ history, enqueueSnackbar, dispatch }) {
   const classes = useStyles();
 
   const [credentials, setCredentials] = useState({
@@ -23,11 +22,17 @@ function SignUp({ dispatch, history, enqueueSnackbar }) {
     lastName: '',
     email: '',
     password: '',
-    passwordConfirmation: ''
+    passwordConfirmation: '',
+    height: 0,
+    weight: 0
   });
 
   const handleChange = name => (event) => {
     setCredentials({ ...credentials, [name]: event.target.value });
+  };
+
+  const handleNumberChange = name => (event) => {
+    setCredentials({ ...credentials, [name]: +event.target.value });
   };
 
   const handleSubmit = (event) => {
@@ -70,6 +75,34 @@ function SignUp({ dispatch, history, enqueueSnackbar }) {
                 name="lastName"
                 autoComplete="lname"
                 onChange={handleChange('lastName')}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="weight"
+                label="Weight (lbs.)"
+                onChange={handleNumberChange('weight')}
+                type="number"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="height"
+                label="Height (inch)"
+                onChange={handleNumberChange('height')}
+                type="number"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+                variant="outlined"
               />
             </Grid>
             <Grid item xs={12}>

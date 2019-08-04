@@ -7,7 +7,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -23,6 +22,10 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 100,
+  }
 }));
 
 export default useStyles;

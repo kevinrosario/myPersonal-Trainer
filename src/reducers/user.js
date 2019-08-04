@@ -9,7 +9,10 @@ const user = (state = null, action) => {
       email: action.user.email,
       token: action.user.token,
       id: action.user._id || action.user.id,
-      workouts: action.workouts
+      firstName: action.user.firstName,
+      lastName: action.user.lastName,
+      weight: action.user.weight,
+      height: action.user.height,
     };
   case 'SIGNOUT_SUCCESS':
     return null;
