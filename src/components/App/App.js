@@ -6,6 +6,8 @@ import Header from '../Header/Header';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import SignOut from '../SignOut/SignOut';
+import HomeScreen from '../HomeScreen/HomeScreen';
+import EditWorkout from '../Workouts/EditWorkout';
 import AccountConfiguration from '../AccountConfiguration/AccountConfiguration';
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 
@@ -21,6 +23,16 @@ function App() {
             exact
             path="/account-configuration"
             render={() => <AccountConfiguration open />}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/home"
+            render={() => <HomeScreen />}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/edit-workout/:id"
+            render={() => <EditWorkout />}
           />
         </Header>
       </SnackbarProvider>

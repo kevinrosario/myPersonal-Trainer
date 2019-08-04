@@ -1,5 +1,5 @@
 import axios from 'axios';
-import apiUrl from '../apiConfig';
+import { apiUrl } from '../apiConfig';
 
 export const signUp = credentials => axios({
   method: 'POST',

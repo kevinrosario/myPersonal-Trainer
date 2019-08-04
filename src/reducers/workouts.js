@@ -1,14 +1,19 @@
 /* eslint no-underscore-dangle: 0 */
 
-const workouts = (state = null, action) => {
+const workouts = (state = [], action) => {
   switch (action.type) {
-  case 'FETCH_WORKOUT_SUCCESS':
-    return {
+  case 'FETCH_WORKOUTS_SUCCESS':
+    return [
       ...state,
-      workouts: action.workouts
-    };
+      ...action.workouts
+    ];
+  case 'WORKOUT_CREATION_SUCCESS':
+    return [
+      action.workout,
+      ...state
+    ];
   case 'SIGNOUT_SUCCESS':
-    return null;
+    return [];
   default:
     return state;
   }

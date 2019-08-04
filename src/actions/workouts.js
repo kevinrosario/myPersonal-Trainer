@@ -1,23 +1,58 @@
-// import {
-//   signIn, signUp, changePassword, signOut
-// } from '../api/auth';
-// import messages from '../messages/messages';
+/* eslint no-underscore-dangle: 0 */
+import messages from '../messages/messages';
+import { createWorkout } from '../api/workout';
+
 
 export const workoutsRequest = () => ({
-  type: 'FETCH_WORKOUT_REQUEST'
+  type: 'FETCH_WORKOUTS_REQUEST'
 });
 
 export const workoutsRequestSuccess = response => ({
-  type: 'FETCH_WORKOUT_SUCCESS',
+  type: 'FETCH_WORKOUTS_SUCCESS',
   workouts: response.data.workouts
 });
 
 export const workoutsRequestFailure = () => ({
-  type: 'FETCH_WORKOUT_FAILURE'
+  type: 'FETCH_WORKOUTS_FAILURE'
 });
 
-// export const initiateSignIn = (credentials, enqueueSnackbar, history) => (dispatch) => {
-//   dispatch(signInRequest());
+const workoutCreationRequest = () => ({
+  type: 'WORKOUT_CREATION_REQUEST'
+});
+
+const workoutCreationSuccess = response => ({
+  type: 'WORKOUT_CREATION_SUCCESS',
+  workout: response.data.workout
+});
+
+const workoutCreationFailure = () => ({
+  type: 'WORKOUT_CREATION_FAILURE'
+});
+
+export const initiateWorkoutCreation = (
+  selectedExercises,
+  user,
+  history,
+  enqueueSnackbar,
+  dialogHandler
+) => (dispatch) => {
+  dispatch(workoutCreationRequest());
+  return createWorkout(selectedExercises, user)
+    .then((response) => {
+      dispatch(workoutCreationSuccess(response));
+      history.push(`/edit-workout/${response.data.workout._id}`);
+      enqueueSnackbar(messages.workoutCreated, { variant: 'success' });
+    })
+    .then(dialogHandler)
+    .catch((error) => {
+      enqueueSnackbar(messages.createFailed, { variant: 'error' });
+      console.error(error);
+      dispatch(workoutCreationFailure());
+    });
+};
+
+// export const initiateWorkoutCreation = (credentials, enqueueSnackbar, history) => (dispatch) => {
+//   dispatch(workoutCreationRequest());
 //   return signIn(credentials)
 //     .then((response) => {
 //       dispatch(signInSuccess(response));
@@ -26,33 +61,8 @@ export const workoutsRequestFailure = () => ({
 //     .then(() => history.push('/home'))
 //     .catch(() => dispatch(signInFailure()));
 // };
-//
-// const signUpRequest = () => ({
-//   type: 'SIGNUP_REQUEST'
-// });
-//
-// const signUpSuccess = response => ({
-//   type: 'SIGNUP_SUCCESS',
-//   user: response.data.user
-// });
-//
-// const signUpFailure = () => ({
-//   type: 'SIGNUP_FAILURE'
-// });
-//
-// export const initiateSignUp = (credentials, history, enqueueSnackbar) => (dispatch) => {
-//   dispatch(signUpRequest());
-//   return signUp(credentials)
-//     .then(() => {
-//       dispatch(signInRequest());
-//       return signIn(credentials)
-//         .then(response => dispatch(signUpSuccess(response)))
-//         .then(() => enqueueSnackbar(messages.signUpSuccess, { variant: 'success' }))
-//         .then(() => history.push('/home'))
-//         .catch(() => dispatch(signInFailure()));
-//     })
-//     .catch(() => dispatch(signUpFailure()));
-// };
+
+// setWorkoutTemplate(response.data.workoutTemplate)
 //
 // const changePasswordRequest = () => ({
 //   type: 'CHANGEPW_REQUEST'
