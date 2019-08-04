@@ -54,22 +54,22 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                required
+                fullWidth
+                autoFocus
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
-                required
-                fullWidth
                 id="firstName"
                 label="First Name"
-                autoFocus
                 onChange={handleChange('firstName')}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                variant="outlined"
                 required
                 fullWidth
+                variant="outlined"
                 id="lastName"
                 label="Last Name"
                 name="lastName"
@@ -107,9 +107,9 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 required
                 fullWidth
+                variant="outlined"
                 id="email"
                 label="Email Address"
                 name="email"
@@ -119,9 +119,9 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 required
                 fullWidth
+                variant="outlined"
                 name="password"
                 label="Password"
                 type="password"
@@ -132,9 +132,9 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 required
                 fullWidth
+                variant="outlined"
                 name="passwordConfirmation"
                 label="Password Confirmation"
                 type="password"
@@ -145,8 +145,8 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
             </Grid>
           </Grid>
           <Button
-            type="submit"
             fullWidth
+            type="submit"
             variant="contained"
             color="primary"
             className={classes.submit}

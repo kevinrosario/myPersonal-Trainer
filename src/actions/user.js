@@ -51,7 +51,10 @@ export const initiateSignUp = (credentials, history, enqueueSnackbar) => (dispat
     .then(() => {
       dispatch(signInRequest());
       return signIn(credentials)
-        .then(response => dispatch(signUpSuccess(response)))
+        .then((response) => {
+          dispatch(signUpSuccess(response));
+          dispatch(workoutsRequestSuccess(response)); // add workouts to state
+        })
         .then(() => enqueueSnackbar(messages.signUpSuccess, { variant: 'success' }))
         .then(() => history.push('/home'))
         .catch(() => dispatch(signInFailure()));
@@ -71,10 +74,15 @@ const changePasswordSuccess = () => ({
   type: 'CHANGEPW_SUCCESS'
 });
 
-export const initiateChangePassword = (passwords, user) => (dispatch) => {
+export const initiateChangePassword = (passwords,
+  user,
+  handleClose,
+  enqueueSnackbar) => (dispatch) => {
   dispatch(changePasswordRequest());
   return changePassword(passwords, user)
     .then(() => dispatch(changePasswordSuccess()))
+    .then(() => enqueueSnackbar(messages.changePasswordSuccess, { variant: 'success' }))
+    .then(handleClose)
     .catch(() => dispatch(changePasswordFailure()));
 };
 

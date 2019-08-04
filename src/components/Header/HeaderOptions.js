@@ -11,6 +11,10 @@ import Input from '@material-ui/icons/Input';
 // Options
 export const authenticatedOptions = (
   <Fragment>
+    <ListItem button component={Link} to="/home" key="home">
+      <ListItemIcon><Home /></ListItemIcon>
+      <ListItemText primary="Home" />
+    </ListItem>
     <ListItem button component={Link} to="/account-configuration" key="account-configuration">
       <ListItemIcon><SettingsApplications /></ListItemIcon>
       <ListItemText primary="Account Configuration" />
@@ -18,10 +22,6 @@ export const authenticatedOptions = (
     <ListItem button component={Link} to="/sign-out" key="sign-out">
       <ListItemIcon><PowerSettingsNew /></ListItemIcon>
       <ListItemText primary="Sign-Out" />
-    </ListItem>
-    <ListItem button component={Link} to="/home" key="home">
-      <ListItemIcon><Home /></ListItemIcon>
-      <ListItemText primary="Home" />
     </ListItem>
   </Fragment>
 );
