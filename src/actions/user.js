@@ -17,14 +17,13 @@ const signInFailure = () => ({
   type: 'SIGNIN_FAILURE'
 });
 
-export const initiateSignIn = (credentials, enqueueSnackbar) => (dispatch) => {
+export const initiateSignIn = (credentials, enqueueSnackbar, history) => (dispatch) => {
   console.log('User action', credentials);
   dispatch(signInRequest());
   return signIn(credentials)
-    .then((response) => {
-      enqueueSnackbar(messages.signInSuccess, { variant: 'success' });
-      dispatch(signInSuccess(response));
-    })
+    .then(response => dispatch(signInSuccess(response)))
+    .then(() => enqueueSnackbar(messages.signInSuccess, { variant: 'success' }))
+    .then(() => history.push('/home'))
     .catch(() => dispatch(signInFailure()));
 };
 
@@ -41,16 +40,15 @@ const signUpFailure = () => ({
   type: 'SIGNUP_FAILURE'
 });
 
-export const initiateSignUp = (credentials, enqueueSnackbar) => (dispatch) => {
+export const initiateSignUp = (credentials, history, enqueueSnackbar) => (dispatch) => {
   dispatch(signUpRequest());
   return signUp(credentials)
-    .then((res) => {
-      console.log(res, enqueueSnackbar);
+    .then(() => {
       dispatch(signInRequest());
       return signIn(credentials)
-        .then((response) => {
-          dispatch(signUpSuccess(response));
-        })
+        .then(response => dispatch(signUpSuccess(response)))
+        .then(() => enqueueSnackbar(messages.signUpSuccess, { variant: 'success' }))
+        .then(() => history.push('/home'))
         .catch(() => dispatch(signInFailure()));
     })
     .catch(() => dispatch(signUpFailure()));
@@ -83,8 +81,9 @@ const signOutSuccess = () => ({
   type: 'SIGNOUT_SUCCESS'
 });
 
-export const initiateSignOut = user => (dispatch) => {
+export const initiateSignOut = (user, enqueueSnackbar) => (dispatch) => {
   signOut(user)
     .then(() => dispatch(signOutSuccess()))
+    .then(() => enqueueSnackbar(messages.signOutSuccess, { variant: 'success' }))
     .catch(() => dispatch(signOutFailure()));
 };

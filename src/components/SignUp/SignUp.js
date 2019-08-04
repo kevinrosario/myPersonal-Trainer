@@ -8,11 +8,14 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { withSnackbar } from 'notistack';
+import { connect } from 'react-redux';
+import { initiateSignUp } from '../../actions/user';
 import useStyles from './SignUpStyles';
 
 
-export default function SignUp() {
+function SignUp({ dispatch, history, enqueueSnackbar }) {
   const classes = useStyles();
 
   const [credentials, setCredentials] = useState({
@@ -29,7 +32,7 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(credentials);
+    dispatch(initiateSignUp(credentials, history, enqueueSnackbar));
   };
 
   return (
@@ -130,3 +133,5 @@ export default function SignUp() {
     </Container>
   );
 }
+
+export default withRouter(connect()(withSnackbar(SignUp)));

@@ -10,10 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import { authenticatedOptions, unauthenticatedOptions } from './HeaderOptions';
 import useStyles from './HeaderStyles';
 
-const Header = ({ children, user, container }) => {
+const Header = ({ children, user }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -54,7 +55,6 @@ const Header = ({ children, user, container }) => {
       <nav className={classes.drawer} aria-label="Main Actions">
         <Hidden smUp implementation="css">
           <Drawer
-            container={container}
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
@@ -83,4 +83,6 @@ const Header = ({ children, user, container }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => ({ user: state.user });
+
+export default connect(mapStateToProps)(Header);

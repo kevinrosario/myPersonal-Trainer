@@ -8,13 +8,13 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
 import { initiateSignIn } from '../../actions/user';
 import useStyles from './SignInStyles';
 
-function SignIn({ dispatch, enqueueSnackbar }) {
+function SignIn({ dispatch, enqueueSnackbar, history }) {
   const classes = useStyles();
   const [credentials, setCredentials] = useState({
     email: '',
@@ -27,7 +27,7 @@ function SignIn({ dispatch, enqueueSnackbar }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(initiateSignIn(credentials, enqueueSnackbar));
+    dispatch(initiateSignIn(credentials, enqueueSnackbar, history));
   };
 
   return (
@@ -88,6 +88,4 @@ function SignIn({ dispatch, enqueueSnackbar }) {
   );
 }
 
-const mapStateToProps = state => ({ user: state.user });
-
-export default connect(mapStateToProps)(withSnackbar(SignIn));
+export default withRouter(connect()(withSnackbar(SignIn)));
