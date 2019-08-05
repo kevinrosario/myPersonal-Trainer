@@ -27,6 +27,7 @@ function Timer({ workouts, match }) {
   useEffect(() => {
     if (restTime === 0) {
       clearInterval(timerInterval); // stop interval
+      setTimerInterval(null);
       if (sets === 0) {
         if (unfinishedExercises.length > 0) {
           // set next exercise
@@ -69,9 +70,13 @@ function Timer({ workouts, match }) {
               <Typography variant="h5">{`Exercise: ${currentExercise.name || ''}`}</Typography>
               <Typography variant="h5">{`Sets left: ${sets}`}</Typography>
               <Typography variant="h5">{`Expected repetions: ${repetions}`}</Typography>
-              <Button variant="contained" className={classes.button} onClick={handleStart}>
-                {sets !== 0 ? 'Rest' : unfinishedExercises.length === 0 ? 'Finish' : 'Next'}
-              </Button>
+              {!timerInterval
+                ? (
+                  <Button variant="contained" className={classes.button} onClick={handleStart}>
+                    {sets !== 0 ? 'Rest' : unfinishedExercises.length === 0 ? 'Finish' : 'Next'}
+                  </Button>
+                )
+                : ''}
             </Fragment>
           )
           : <Typography variant="h5"> You are done!</Typography>}
