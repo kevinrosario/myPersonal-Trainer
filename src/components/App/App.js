@@ -7,7 +7,7 @@ import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import SignOut from '../SignOut/SignOut';
 import HomeScreen from '../HomeScreen/HomeScreen';
-import EditWorkout from '../Workouts/EditWorkout';
+import EditWorkout from '../EditWorkout/EditWorkout';
 import AccountConfiguration from '../AccountConfiguration/AccountConfiguration';
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 

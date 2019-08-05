@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import WorkoutList from '../Workouts/WorkoutList';
-import CreateWorkoutDialog from '../Workouts/CreateWorkoutDialog';
+import WorkoutList from './WorkoutList';
+import CreateWorkoutDialog from './CreateWorkoutDialog';
 
 function HomeScreen() {
   const [createWorkoutDialog, setCreateWorkoutDialog] = useState(false);
