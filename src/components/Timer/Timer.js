@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-plusplus: 0 */
+/* eslint no-nested-ternary: 0 */
 import React, { Fragment, useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -7,16 +8,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import makeStyles from './TimerStyles';
 
-// else {
-//   clearInterval(timerInterval);
-//   setTimerInterval(null);
-//   setRestTime(currentExercise.restTime);
-//   if (sets === 0) {
-//     setCurrentExercise(unfinishedExercises.shift());
-//     setRestTime(currentExercise.restTime);
-//     setSets(currentExercise.sets);
-//   }
-// }
 function Timer({ workouts, match }) {
   const classes = makeStyles();
   // Set unfinished exercises
@@ -35,9 +26,10 @@ function Timer({ workouts, match }) {
 
   useEffect(() => {
     if (restTime === 0) {
-      clearInterval(timerInterval);
+      clearInterval(timerInterval); // stop interval
       if (sets === 0) {
         if (unfinishedExercises.length > 0) {
+          // set next exercise
           setCurrentExercise(() => {
             const exercise = unfinishedExercises.shift();
             setSets(() => exercise.sets);
@@ -46,9 +38,11 @@ function Timer({ workouts, match }) {
             return exercise;
           });
         } else {
+          // workout finished
           setCurrentExercise(null);
         }
       } else {
+        // set next values to current exercise
         setSets(prevSet => prevSet - 1);
         setRestTime(currentExercise.restTime);
       }
@@ -56,11 +50,13 @@ function Timer({ workouts, match }) {
   }, [restTime]);
 
   const handleStart = () => {
-    setTimerInterval(
-      setInterval(() => {
-        setRestTime(prevTime => prevTime - 1);
-      }, 1000)
-    );
+    if (restTime > 0) {
+      setTimerInterval(
+        setInterval(() => {
+          setRestTime(prevTime => prevTime - 1);
+        }, 1000)
+      );
+    }
   };
 
   return (
@@ -74,7 +70,7 @@ function Timer({ workouts, match }) {
               <Typography variant="h5">{`Sets left: ${sets}`}</Typography>
               <Typography variant="h5">{`Expected repetions: ${repetions}`}</Typography>
               <Button variant="contained" className={classes.button} onClick={handleStart}>
-                    Rest
+                {sets !== 0 ? 'Rest' : unfinishedExercises.length === 0 ? 'Finish' : 'Next'}
               </Button>
             </Fragment>
           )
