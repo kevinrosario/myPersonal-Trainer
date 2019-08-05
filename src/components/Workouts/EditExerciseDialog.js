@@ -18,8 +18,6 @@ function EditExerciseDialog({
   setExercise,
   editExercisesDialogHandler
 }) {
-  // const { editExercisesDialogHandler, exercise, setExercise, user,
-  //   workoutTemplate, setWorkoutTemplate, makeStyles, enqueueSnackbar } = props
   const classes = makeStyles();
 
   const handleSave = () => {

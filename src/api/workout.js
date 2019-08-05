@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: 0 */
+
 import axios from 'axios';
 import { apiUrl, thirdPartyAPI } from '../apiConfig';
 
@@ -8,9 +10,7 @@ export const createWorkout = (exercises, user) => axios({
     Authorization: `Token token=${user.token}`
   },
   data: {
-    workout: {
-      exercises
-    }
+    exercises
   }
 });
 
@@ -28,6 +28,28 @@ export const getExercises = (parameters) => {
     url: thirdPartyAPI + urlParameters
   });
 };
+
+export const createMultipleExercises = (exercises, user) => axios({
+  method: 'POST',
+  url: `${apiUrl}/multiple-exercises`,
+  headers: {
+    Authorization: `Token token=${user.token}`
+  },
+  data: {
+    exercises
+  }
+});
+
+export const updateWorkout = (workout, user) => axios({
+  method: 'PATCH',
+  url: `${apiUrl}/workouts/${workout._id}`,
+  headers: {
+    Authorization: `Token token=${user.token}`
+  },
+  data: {
+    workout
+  }
+});
 
 
 // export const getAllTemplates = user => {
@@ -56,18 +78,6 @@ export const getExercises = (parameters) => {
 //     }
 //   })
 // }
-// export const updateWorkout = (workoutTemplate, user) => {
-//   return axios({
-//     method: 'PATCH',
-//     url: apiUrl + `/workout-templates/${workoutTemplate._id}`,
-//     headers: {
-//       'Authorization': `Token token=${user.token}`
-//     },
-//     data: {
-//       workoutTemplate
-//     }
-//   })
-// }
 //
 // export const destroyWorkout = (workoutTemplate, user) => {
 //   return axios({
@@ -93,19 +103,7 @@ export const getExercises = (parameters) => {
 //   })
 // }
 //
-// export const createMultipleExercises = (exercises, user) => {
-//   return axios({
-//     method: 'POST',
-//     url: apiUrl + '/multiple-exercises',
-//     headers: {
-//       'Authorization': `Token token=${user.token}`
-//     },
-//     data: {
-//       exercises
-//     }
-//   })
-// }
-//
+
 // export const destroyExercise = (exercise, user, workoutTemplateID) => {
 //   return axios({
 //     method: 'DELETE',

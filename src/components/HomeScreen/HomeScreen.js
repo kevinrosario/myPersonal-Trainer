@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import CreateWorkoutDialog from '../Workouts/CreateWorkoutDialog';
 import WorkoutList from '../Workouts/WorkoutList';
+import CreateWorkoutDialog from '../Workouts/CreateWorkoutDialog';
 
 function HomeScreen() {
   const [exercisesDialog, setCreateWorkoutDialog] = useState(false);
@@ -21,12 +21,5 @@ function HomeScreen() {
     </Fragment>
   );
 }
-
-// const { user, workoutTemplates, setWorkoutTemplates, exercisesDialog, exercisesDialogHandler,
-//   workoutTemplate, setWorkoutTemplate, selectedExercises, setSeletectedExercises, exerciseList,
-//   setExerciseList, setUnfinishedExercises, setCurrentExercise, setRestTime,
-//   setSets, makeStyles } = props
-//
-// setWorkoutTemplate(null)
 
 export default withRouter(HomeScreen);

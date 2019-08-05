@@ -19,8 +19,6 @@ function EditExerciseList({
   workout,
   user
 }) {
-  // const { user, workout, editExercisesDialogHandler, editExercisesDialog, exercise,
-  //   setExercise, setWorkoutTemplate, makeStyles, enqueueSnackbar } = props
   const classes = makeStyles();
 
   const handleDestroy = (exercise, workoutID) => {
@@ -88,7 +86,7 @@ function EditExerciseList({
 //     />
 //   )
 //   : ''}
-
+//
 // {
 //   editExercisesDialogHandler()
 //   setExercise(exercise)

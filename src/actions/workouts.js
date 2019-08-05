@@ -1,8 +1,8 @@
 /* eslint no-underscore-dangle: 0 */
 import messages from '../messages/messages';
-import { createWorkout } from '../api/workout';
+import { createWorkout, updateWorkout } from '../api/workout';
 
-
+// workouts request actions
 export const workoutsRequest = () => ({
   type: 'FETCH_WORKOUTS_REQUEST'
 });
@@ -16,6 +16,7 @@ export const workoutsRequestFailure = () => ({
   type: 'FETCH_WORKOUTS_FAILURE'
 });
 
+// Create workout actions
 const workoutCreationRequest = () => ({
   type: 'WORKOUT_CREATION_REQUEST'
 });
@@ -46,8 +47,40 @@ export const initiateWorkoutCreation = (
     .then(dialogHandler)
     .catch((error) => {
       enqueueSnackbar(messages.createFailed, { variant: 'error' });
-      console.error(error);
       dispatch(workoutCreationFailure());
+      console.error(error);
+    });
+};
+
+// Update workout actions
+const updateWorkoutRequest = () => ({
+  type: 'UPDATE_WORKOUT_REQUEST'
+});
+
+const updateWorkoutFailure = () => ({
+  type: 'UPDATE_WORKOUT_FAILURE'
+});
+
+const updateWorkoutSuccess = response => ({
+  type: 'UPDATE_WORKOUT_SUCCESS',
+  workout: response.data.workout
+});
+
+export const initiateUpdateWorkout = (
+  workout,
+  user,
+  enqueueSnackbar,
+  dialogHandler
+) => (dispatch) => {
+  dispatch(updateWorkoutRequest());
+  return updateWorkout(workout, user)
+    .then(response => dispatch(updateWorkoutSuccess(response)))
+    .then(() => enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' }))
+    .then(dialogHandler)
+    .catch((error) => {
+      enqueueSnackbar(messages.updateFailed, { variant: 'error' });
+      dispatch(updateWorkoutFailure());
+      console.error(error);
     });
 };
 
@@ -60,27 +93,6 @@ export const initiateWorkoutCreation = (
 //     .then(() => enqueueSnackbar(messages.signInSuccess, { variant: 'success' }))
 //     .then(() => history.push('/home'))
 //     .catch(() => dispatch(signInFailure()));
-// };
-
-// setWorkoutTemplate(response.data.workoutTemplate)
-//
-// const changePasswordRequest = () => ({
-//   type: 'CHANGEPW_REQUEST'
-// });
-//
-// const changePasswordFailure = () => ({
-//   type: 'CHANGEPW_FAILURE'
-// });
-//
-// const changePasswordSuccess = () => ({
-//   type: 'CHANGEPW_SUCCESS'
-// });
-//
-// export const initiateChangePassword = (passwords, user) => (dispatch) => {
-//   dispatch(changePasswordRequest());
-//   return changePassword(passwords, user)
-//     .then(() => dispatch(changePasswordSuccess()))
-//     .catch(() => dispatch(changePasswordFailure()));
 // };
 //
 // const signOutFailure = () => ({

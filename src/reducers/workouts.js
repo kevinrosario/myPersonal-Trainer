@@ -12,6 +12,12 @@ const workouts = (state = [], action) => {
       action.workout,
       ...state
     ];
+  case 'UPDATE_WORKOUT_SUCCESS':
+    return state.map(workout => (
+      workout._id === action.workout._id
+        ? { ...workout, exercises: [...action.workout.exercises] }
+        : workout
+    ));
   case 'SIGNOUT_SUCCESS':
     return [];
   default:

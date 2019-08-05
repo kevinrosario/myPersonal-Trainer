@@ -1,11 +1,10 @@
 /* eslint no-underscore-dangle: 0 */
 
 import React, { Fragment, useEffect, useState } from 'react';
-// import Fab from '@material-ui/core/Fab';
-// import AddIcon from '@material-ui/icons/Add';
-// import SaveIcon from '@material-ui/icons/Save';
-// import DeleteIcon from '@material-ui/icons/Delete';
-// import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withRouter } from 'react-router-dom';
@@ -14,15 +13,21 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import EditExerciseList from './EditExerciseList';
-// import ExerciseSelectorDialog from '../ExerciseSelectorDialog/ExerciseSelectorDialog';
 import makeStyles from './WorkoutsStyles';
+import AddExerciseDialog from './AddExerciseDialog';
+// import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 // import { getTemplate, updateWorkout, destroyWorkout } from '../../api/workout';
-// import messages from '../Messages/messages';
 
 function EditWorkout({ match, user, workouts }) {
   const [workout, setWorkout] = useState(null);
+  const [exercisesDialog, setCreateWorkoutDialog] = useState(false);
   const classes = makeStyles();
 
+  const dialogHandler = () => {
+    setCreateWorkoutDialog(!exercisesDialog);
+  };
+
+  // Set exercise from state on component mount
   useEffect(() => {
     const work = workouts.find(stateWorkout => stateWorkout._id === match.params.id);
     setWorkout(work);
@@ -32,24 +37,30 @@ function EditWorkout({ match, user, workouts }) {
     setWorkout({ ...workout, [name]: event.target.value });
   };
 
-  // const handleUpdate = event => {
-  //   updateWorkout(workout, user)
-  //     .then((response) => {
-  //       setWorkoutTemplate(response.data.workout)
-  //       enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' })
-  //     })
-  //     .catch(console.error)
-  // }
+  // const handleSubmit = name => (event) => {
+  //   setWorkout({ ...workout, [name]: event.target.value });
+  // };
 
-  // const handleDestroy = event => {
-  //   destroyWorkout(workout, user)
-  //     .then(() => {
-  //       history.push('/home')
-  //       setWorkoutTemplate(null)
-  //       enqueueSnackbar(messages.deletedSuccessfully, { variant: 'error' })
-  //     })
-  //     .catch(console.error)
-  // }
+  const handleUpdate = (event) => {
+    console.log(event);
+    // updateWorkout(workout, user)
+    //   .then((response) => {
+    //     setWorkoutTemplate(response.data.workout)
+    //     enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' })
+    //   })
+    //   .catch(console.error)
+  };
+
+  const handleDestroy = (event) => {
+    console.log(event);
+    // destroyWorkout(workout, user)
+    //   .then(() => {
+    //     history.push('/home')
+    //     setWorkoutTemplate(null)
+    //     enqueueSnackbar(messages.deletedSuccessfully, { variant: 'error' })
+    //   })
+    //   .catch(console.error)
+  };
 
   return (
     <Fragment>
@@ -76,25 +87,45 @@ function EditWorkout({ match, user, workouts }) {
             : ''}
         </div>
       </Container>
+      {/* Dialog to add more exercises */}
+      {exercisesDialog
+        ? (
+          <AddExerciseDialog
+            open
+            workout={workout}
+            setWorkout={setWorkout}
+            dialogHandler={dialogHandler}
+          />
+        )
+        : ''}
+      <div className={classes.add}>
+        <Fab
+          aria-label="Save Exercise"
+          className={classes.fab}
+          color="secondary"
+          onClick={handleUpdate}
+        >
+          <SaveIcon />
+        </Fab>
+        <Fab
+          aria-label="Delete Exercise"
+          className={classes.fab}
+          color="secondary"
+          onClick={handleDestroy}
+        >
+          <DeleteIcon />
+        </Fab>
+        <Fab aria-label="Add Exercise" color="primary" onClick={dialogHandler}>
+          <AddIcon />
+        </Fab>
+      </div>
     </Fragment>
   );
 }
 // {exercisesDialog
-//   ? <ExerciseSelectorDialog open user={user} />
+//   ? ()
 //   : ''}
-// <div className={classes.add}>
-//   <Fab aria-label="Save Exercise" className={classes.fab} color="secondary"
-//     onClick={handleUpdate}>
-//     <SaveIcon />
-//   </Fab>
-//   <Fab aria-label="Delete Exercise" className={classes.fab} color="secondary"
-//     onClick={handleDestroy}>
-//     <DeleteIcon />
-//   </Fab>
-//   <Fab aria-label="Add Exercise" color="primary" onClick={exercisesDialogHandler}>
-//     <AddIcon />
-//   </Fab>
-// </div>
+// Add to each exercise and link to timer
 // <Fab aria-label="Start Exercise" className={classes.fab}>
 //   <FitnessCenterIcon />
 // </Fab>
