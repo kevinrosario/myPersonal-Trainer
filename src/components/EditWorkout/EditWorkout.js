@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
@@ -29,20 +29,16 @@ function EditWorkout({
   enqueueSnackbar,
   history
 }) {
-  const [workout, setWorkout] = useState(null);
+  // Set exercise from state on component mount
+  // This component is getting rendered using a link.
+  const [workout, setWorkout] = useState(() => (
+    workouts.find(stateWorkout => stateWorkout._id === match.params.id)));
   const [addExercisesDialog, setAddExerciseDialog] = useState(false);
   const classes = makeStyles();
 
   const addExerciseDialogHandler = () => {
     setAddExerciseDialog(!addExercisesDialog);
   };
-
-  // Set exercise from state on component mount
-  // This component is getting rendered using a link.
-  useEffect(() => {
-    const work = workouts.find(stateWorkout => stateWorkout._id === match.params.id);
-    setWorkout(work);
-  }, []);
 
   const handleChange = name => (event) => {
     setWorkout({ ...workout, [name]: event.target.value });
