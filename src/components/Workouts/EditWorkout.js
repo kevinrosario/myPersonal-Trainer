@@ -7,18 +7,28 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { withRouter } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import EditExerciseList from './EditExerciseList';
+import { initiateUpdateWorkout, initiateDestroyWorkout } from '../../actions/workouts';
 import makeStyles from './WorkoutsStyles';
+import EditExerciseList from './EditExerciseList';
 import AddExerciseDialog from './AddExerciseDialog';
 // import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 // import { getTemplate, updateWorkout, destroyWorkout } from '../../api/workout';
 
-function EditWorkout({ match, user, workouts }) {
+function EditWorkout({
+  match,
+  user,
+  workouts,
+  dispatch,
+  enqueueSnackbar,
+  history
+}) {
   const [workout, setWorkout] = useState(null);
   const [exercisesDialog, setCreateWorkoutDialog] = useState(false);
   const classes = makeStyles();
@@ -37,29 +47,22 @@ function EditWorkout({ match, user, workouts }) {
     setWorkout({ ...workout, [name]: event.target.value });
   };
 
-  // const handleSubmit = name => (event) => {
-  //   setWorkout({ ...workout, [name]: event.target.value });
-  // };
-
-  const handleUpdate = (event) => {
-    console.log(event);
-    // updateWorkout(workout, user)
-    //   .then((response) => {
-    //     setWorkoutTemplate(response.data.workout)
-    //     enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' })
-    //   })
-    //   .catch(console.error)
+  const handleUpdate = () => {
+    dispatch(initiateUpdateWorkout(
+      workout,
+      user,
+      enqueueSnackbar,
+      dialogHandler
+    ));
   };
 
-  const handleDestroy = (event) => {
-    console.log(event);
-    // destroyWorkout(workout, user)
-    //   .then(() => {
-    //     history.push('/home')
-    //     setWorkoutTemplate(null)
-    //     enqueueSnackbar(messages.deletedSuccessfully, { variant: 'error' })
-    //   })
-    //   .catch(console.error)
+  const handleDestroy = () => {
+    dispatch(initiateDestroyWorkout(
+      workout,
+      user,
+      enqueueSnackbar,
+      history
+    ));
   };
 
   return (
@@ -77,6 +80,19 @@ function EditWorkout({ match, user, workouts }) {
                   value={workout.name || ''}
                   onChange={handleChange('name')}
                   margin="normal"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          edge="end"
+                          aria-label="toggle password visibility"
+                          onClick={handleUpdate}
+                        >
+                          <SaveIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <Typography component="h1" variant="h5">
                 List of Exercises
@@ -99,14 +115,6 @@ function EditWorkout({ match, user, workouts }) {
         )
         : ''}
       <div className={classes.add}>
-        <Fab
-          aria-label="Save Exercise"
-          className={classes.fab}
-          color="secondary"
-          onClick={handleUpdate}
-        >
-          <SaveIcon />
-        </Fab>
         <Fab
           aria-label="Delete Exercise"
           className={classes.fab}

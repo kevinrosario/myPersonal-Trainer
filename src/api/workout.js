@@ -51,6 +51,13 @@ export const updateWorkout = (workout, user) => axios({
   }
 });
 
+export const destroyWorkout = (workout, user) => axios({
+  method: 'DELETE',
+  url: `${apiUrl}/workouts/${workout._id}`,
+  headers: {
+    Authorization: `Token token=${user.token}`
+  }
+});
 
 // export const getAllTemplates = user => {
 //   return axios({
@@ -79,15 +86,7 @@ export const updateWorkout = (workout, user) => axios({
 //   })
 // }
 //
-// export const destroyWorkout = (workoutTemplate, user) => {
-//   return axios({
-//     method: 'DELETE',
-//     url: apiUrl + `/workout-templates/${workoutTemplate._id}`,
-//     headers: {
-//       'Authorization': `Token token=${user.token}`
-//     }
-//   })
-// }
+
 //
 // export const updateExercise = (exercise, user, workoutTemplateID) => {
 //   return axios({

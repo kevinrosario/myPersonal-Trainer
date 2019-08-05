@@ -15,9 +15,11 @@ const workouts = (state = [], action) => {
   case 'UPDATE_WORKOUT_SUCCESS':
     return state.map(workout => (
       workout._id === action.workout._id
-        ? { ...workout, exercises: [...action.workout.exercises] }
+        ? { ...action.workout }
         : workout
     ));
+  case 'DESTROY_WORKOUT_SUCCESS':
+    return state.filter(workout => (workout._id !== action.workout._id));
   case 'SIGNOUT_SUCCESS':
     return [];
   default:

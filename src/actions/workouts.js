@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import messages from '../messages/messages';
-import { createWorkout, updateWorkout } from '../api/workout';
+import { createWorkout, updateWorkout, destroyWorkout } from '../api/workout';
 
 // workouts request actions
 export const workoutsRequest = () => ({
@@ -69,20 +69,57 @@ const updateWorkoutSuccess = response => ({
 export const initiateUpdateWorkout = (
   workout,
   user,
-  enqueueSnackbar,
-  dialogHandler
+  enqueueSnackbar
 ) => (dispatch) => {
   dispatch(updateWorkoutRequest());
   return updateWorkout(workout, user)
     .then(response => dispatch(updateWorkoutSuccess(response)))
-    .then(() => enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' }))
-    .then(dialogHandler)
+    .then(() => enqueueSnackbar(messages.deletedSuccessfully, { variant: 'success' }))
     .catch((error) => {
       enqueueSnackbar(messages.updateFailed, { variant: 'error' });
       dispatch(updateWorkoutFailure());
       console.error(error);
     });
 };
+
+const destroyWorkoutRequest = () => ({
+  type: 'DESTROY_WORKOUT_REQUEST'
+});
+
+const destroyWorkoutFailure = () => ({
+  type: 'DESTROY_WORKOUT_FAILURE'
+});
+
+const destroyWorkoutSuccess = workout => ({
+  type: 'DESTROY_WORKOUT_SUCCESS',
+  workout
+});
+
+export const initiateDestroyWorkout = (
+  workout,
+  user,
+  enqueueSnackbar,
+  history
+) => (dispatch) => {
+  dispatch(destroyWorkoutRequest());
+  return destroyWorkout(workout, user)
+    .then(() => dispatch(destroyWorkoutSuccess(workout)))
+    .then(() => enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' }))
+    .then(() => history.push('/home'))
+    .catch((error) => {
+      enqueueSnackbar(messages.somethingFailed, { variant: 'error' });
+      dispatch(destroyWorkoutFailure());
+      console.error(error);
+    });
+};
+
+// destroyWorkout(workout, user)
+//   .then(() => {
+//     history.push('/home')
+//     setWorkoutTemplate(null)
+//     enqueueSnackbar(messages.deletedSuccessfully, { variant: 'error' })
+//   })
+//   .catch(console.error)
 
 // export const initiateWorkoutCreation = (credentials, enqueueSnackbar, history) => (dispatch) => {
 //   dispatch(workoutCreationRequest());

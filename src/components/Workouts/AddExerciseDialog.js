@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
 import messages from '../../messages/messages';
-import ExerciseSelectorDialog from '../ExerciseSelectorDialog/ExerciseSelectorDialog';
 import { initiateUpdateWorkout } from '../../actions/workouts';
 import { createMultipleExercises } from '../../api/workout';
+import ExerciseSelectorDialog from '../ExerciseSelectorDialog/ExerciseSelectorDialog';
 
 function AddExerciseDialog({
   exercisesDialogHandler,
@@ -27,10 +27,10 @@ function AddExerciseDialog({
         dispatch(initiateUpdateWorkout(
           workout,
           user,
-          enqueueSnackbar,
-          dialogHandler
+          enqueueSnackbar
         ));
       })
+      .then(dialogHandler)
       .catch((error) => {
         console.error(error);
         enqueueSnackbar(messages.updateFailed, { variant: 'error' });
