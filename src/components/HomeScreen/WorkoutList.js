@@ -1,4 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
+
 import React, { Fragment } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
@@ -12,7 +13,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-import makeStyles from './WorkoutsStyles';
+import makeStyles from './WorkoutListStyles';
 
 // Functional Component
 function WorkoutList({ workouts, exercisesDialogHandler }) {

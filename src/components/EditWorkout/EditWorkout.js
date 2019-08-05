@@ -15,7 +15,7 @@ import { withRouter } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
 import { initiateUpdateWorkout, initiateDestroyWorkout } from '../../actions/workouts';
-import makeStyles from './WorkoutsStyles';
+import makeStyles from './EditWorkoutStyles';
 import EditExerciseList from './EditExerciseList';
 import AddExerciseDialog from './AddExerciseDialog';
 // import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
