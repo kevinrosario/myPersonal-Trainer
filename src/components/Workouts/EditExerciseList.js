@@ -29,7 +29,7 @@ function EditExerciseList({
   const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const classes = makeStyles();
 
-  const dialogHandler = () => {
+  const editExerciseDialogHandler = () => {
     setEditExercisesDialog(!editExerciseDialog);
   };
 
@@ -64,7 +64,7 @@ function EditExerciseList({
           aria-label="Edit Exercise"
           size="small"
           onClick={() => {
-            dialogHandler();
+            editExerciseDialogHandler();
             setExerciseToEdit(exercise);
           }}
         >
@@ -94,7 +94,7 @@ function EditExerciseList({
             user={user}
             workout={workout}
             setWorkout={setWorkout}
-            dialogHandler={dialogHandler}
+            editExerciseDialogHandler={editExerciseDialogHandler}
             exercise={exerciseToEdit}
             setExercise={setExerciseToEdit}
           />

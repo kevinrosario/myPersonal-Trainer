@@ -12,8 +12,9 @@ function AddExerciseDialog({
   dispatch,
   user,
   workout,
+  setWorkout,
   enqueueSnackbar,
-  dialogHandler
+  addExerciseDialogHandler
 }) {
   const [selectedExercises, setSeletectedExercises] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
@@ -24,13 +25,14 @@ function AddExerciseDialog({
         // add response exercises to workout
         workout.exercises.push(...response.data.exercises);
         // update workout
+        setWorkout(response.data.workout);
         dispatch(initiateUpdateWorkout(
           workout,
           user,
           enqueueSnackbar
         ));
       })
-      .then(dialogHandler)
+      .then(addExerciseDialogHandler)
       .catch((error) => {
         console.error(error);
         enqueueSnackbar(messages.updateFailed, { variant: 'error' });

@@ -19,7 +19,7 @@ function EditExerciseDialog({
   user,
   exercise,
   setExercise,
-  dialogHandler,
+  editExerciseDialogHandler,
   dispatch,
   enqueueSnackbar,
   workout,
@@ -34,7 +34,7 @@ function EditExerciseDialog({
         enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' });
         setWorkout(response.data.workout);
       })
-      .then(dialogHandler)
+      .then(editExerciseDialogHandler)
       .catch((error) => {
         enqueueSnackbar(messages.updateFailed, { variant: 'error' });
         console.error(error);
@@ -81,7 +81,7 @@ function EditExerciseDialog({
           <Button
             color="secondary"
             variant="contained"
-            onClick={dialogHandler}
+            onClick={editExerciseDialogHandler}
           >
             Cancel
           </Button>

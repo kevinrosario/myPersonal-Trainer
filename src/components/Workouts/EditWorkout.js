@@ -33,7 +33,7 @@ function EditWorkout({
   const [exercisesDialog, setCreateWorkoutDialog] = useState(false);
   const classes = makeStyles();
 
-  const dialogHandler = () => {
+  const addExerciseDialogHandler = () => {
     setCreateWorkoutDialog(!exercisesDialog);
   };
 
@@ -48,15 +48,17 @@ function EditWorkout({
     setWorkout({ ...workout, [name]: event.target.value });
   };
 
+  // update workout name
   const handleUpdate = () => {
     dispatch(initiateUpdateWorkout(
       workout,
       user,
       enqueueSnackbar,
-      dialogHandler
+      addExerciseDialogHandler
     ));
   };
 
+  // destroy workout
   const handleDestroy = () => {
     dispatch(initiateDestroyWorkout(
       workout,
@@ -102,6 +104,7 @@ function EditWorkout({
               </Fragment>
             )
             : ''}
+          {/* Show something when workout does not exist */}
         </div>
       </Container>
       {/* Dialog to add more exercises */}
@@ -111,7 +114,7 @@ function EditWorkout({
             open
             workout={workout}
             setWorkout={setWorkout}
-            dialogHandler={dialogHandler}
+            addExerciseDialogHandler={addExerciseDialogHandler}
           />
         )
         : ''}
@@ -124,7 +127,7 @@ function EditWorkout({
         >
           <DeleteIcon />
         </Fab>
-        <Fab aria-label="Add Exercise" color="primary" onClick={dialogHandler}>
+        <Fab aria-label="Add Exercise" color="primary" onClick={addExerciseDialogHandler}>
           <AddIcon />
         </Fab>
       </div>
