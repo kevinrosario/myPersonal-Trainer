@@ -1,6 +1,6 @@
 # myPersonal Trainer
 
-This is the remake of another application that I already created. The main motivation to make this app was to use redux to manage state in a different way. This app is designed to allow users create workouts and edit them adding or removing exercises. Users can create and edit workouts only by logging in with a name, email, password, height and weight.
+This is the remake of another [application](https://github.com/kevinrosario/myPersonal-Trainer-Client) that I already created. The main motivation to make this app was to use redux to manage state in a different way. This app is designed to allow users create workouts and edit them adding or removing exercises. Users can create and edit workouts only by logging in with a name, email, password, height and weight.
 
 ##### Screenshot
 ![screenshot](./public/screenshot.png)
