@@ -1,7 +1,7 @@
 export let apiUrl;
 
 const apiUrls = {
-  production: 'https://mypersonal-trainer.herokuapp.com',
+  production: ' https://mypersonal-trainer-api-new.herokuapp.com',
   development: 'http://localhost:4741'
 };
 
