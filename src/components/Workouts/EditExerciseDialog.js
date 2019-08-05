@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: 0 */
+
 import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,8 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import { withRouter } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
-// import { updateExercise } from '../../api/workout';
-// import messages from '../../messages/messages';
+import { updateExercise } from '../../api/workout';
+import { updateWorkoutSuccess } from '../../actions/workouts';
+import messages from '../../messages/messages';
 import makeStyles from './WorkoutsStyles';
 
 // Functional Component
@@ -16,23 +19,28 @@ function EditExerciseDialog({
   user,
   exercise,
   setExercise,
-  editExercisesDialogHandler
+  dialogHandler,
+  dispatch,
+  enqueueSnackbar,
+  workout,
+  setWorkout
 }) {
   const classes = makeStyles();
 
   const handleSave = () => {
-    console.log(user);
+    updateExercise(exercise, user, workout._id)
+      .then((response) => {
+        dispatch(updateWorkoutSuccess(response));
+        enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' });
+        setWorkout(response.data.workout);
+      })
+      .then(dialogHandler)
+      .catch((error) => {
+        enqueueSnackbar(messages.updateFailed, { variant: 'error' });
+        console.error(error);
+      });
   };
-  // updateExercise(exercise, user, workoutTemplate._id)
-  //   .then(response => {
-  //     enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' })
-  //     setWorkoutTemplate(response.data.workoutTemplate)
-  //   })
-  //   .then(editExercisesDialogHandler)
-  //   .catch(error => {
-  //     enqueueSnackbar(messages.updateFailed, { variant: 'error' })
-  //     console.error(error)
-  //   })
+
 
   const handleChange = name => (event) => {
     setExercise({ ...exercise, [name]: event.target.value });
@@ -73,7 +81,7 @@ function EditExerciseDialog({
           <Button
             color="secondary"
             variant="contained"
-            onClick={editExercisesDialogHandler}
+            onClick={dialogHandler}
           >
             Cancel
           </Button>

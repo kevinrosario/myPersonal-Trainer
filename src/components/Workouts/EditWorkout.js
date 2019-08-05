@@ -38,6 +38,7 @@ function EditWorkout({
   };
 
   // Set exercise from state on component mount
+  // This component is getting rendered using a link.
   useEffect(() => {
     const work = workouts.find(stateWorkout => stateWorkout._id === match.params.id);
     setWorkout(work);
@@ -97,7 +98,7 @@ function EditWorkout({
                 <Typography component="h1" variant="h5">
                 List of Exercises
                 </Typography>
-                <EditExerciseList user={user} workout={workout} />
+                <EditExerciseList user={user} workout={workout} setWorkout={setWorkout} />
               </Fragment>
             )
             : ''}

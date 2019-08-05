@@ -15,22 +15,28 @@ import { destroyExercise } from '../../api/workout';
 import makeStyles from './WorkoutsStyles';
 import messages from '../../messages/messages';
 import { updateWorkoutSuccess } from '../../actions/workouts';
-// import EditExerciseDialog from './EditExerciseDialog';
+import EditExerciseDialog from './EditExerciseDialog';
 
 function EditExerciseList({
-  workout,
   user,
   enqueueSnackbar,
-  dispatch
+  dispatch,
+  workout,
+  setWorkout
 }) {
   // I need to re-render component when store changes, so I created this until something comes.
-  const [thisWorkout, setThisWorkout] = useState(workout);
+  const [editExerciseDialog, setEditExercisesDialog] = useState(false);
+  const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const classes = makeStyles();
+
+  const dialogHandler = () => {
+    setEditExercisesDialog(!editExerciseDialog);
+  };
 
   const handleDestroy = (exercise, workoutID) => {
     destroyExercise(exercise, user, workoutID)
       .then((response) => {
-        setThisWorkout(response.data.workout);
+        setWorkout(response.data.workout);
         dispatch(updateWorkoutSuccess(response));
         enqueueSnackbar(messages.deletedSuccessfully, { variant: 'error' });
       })
@@ -40,7 +46,7 @@ function EditExerciseList({
       });
   };
 
-  const exercisesArr = thisWorkout.exercises.map(exercise => (
+  const exercisesArr = workout.exercises.map(exercise => (
     <ListItem key={exercise._id} divider>
       <ListItemText id={exercise._id}>
         <Typography variant="body1">
@@ -57,7 +63,10 @@ function EditExerciseList({
           className={classes.fab}
           aria-label="Edit Exercise"
           size="small"
-          onClick={() => {}}
+          onClick={() => {
+            dialogHandler();
+            setExerciseToEdit(exercise);
+          }}
         >
           <EditIcon />
         </Fab>
@@ -78,25 +87,22 @@ function EditExerciseList({
   return (
     <List className={classes.root}>
       {exercisesArr}
+      {editExerciseDialog
+        ? (
+          <EditExerciseDialog
+            open
+            user={user}
+            workout={workout}
+            setWorkout={setWorkout}
+            dialogHandler={dialogHandler}
+            exercise={exerciseToEdit}
+            setExercise={setExerciseToEdit}
+          />
+        )
+        : ''}
     </List>
   );
 }
-
-// {editExercisesDialog
-//   ? (
-//     <EditExerciseDialog
-//       open
-//       user={user}
-//       exercise={exercise}
-//       setExercise={setExercise}
-//     />
-//   )
-//   : ''}
-//
-// {
-//   editExercisesDialogHandler()
-//   setExercise(exercise)
-// }
 
 const mapStateToProps = state => ({ user: state.user });
 

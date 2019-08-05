@@ -70,6 +70,18 @@ export const destroyExercise = (exercise, user, workoutID) => axios({
   }
 });
 
+export const updateExercise = (exercise, user, workoutID) => axios({
+  method: 'PATCH',
+  url: `${apiUrl}/exercises/${exercise._id}`,
+  headers: {
+    Authorization: `Token token=${user.token}`
+  },
+  data: {
+    exercise,
+    id: workoutID
+  }
+});
+
 // export const getAllTemplates = user => {
 //   return axios({
 //     method: 'GET',
@@ -96,20 +108,3 @@ export const destroyExercise = (exercise, user, workoutID) => axios({
 //     }
 //   })
 // }
-//
-
-//
-// export const updateExercise = (exercise, user, workoutTemplateID) => {
-//   return axios({
-//     method: 'PATCH',
-//     url: apiUrl + `/exercises/${exercise._id}`,
-//     headers: {
-//       'Authorization': `Token token=${user.token}`
-//     },
-//     data: {
-//       exercise,
-//       id: workoutTemplateID
-//     }
-//   })
-// }
-//
