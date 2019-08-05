@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { updateExercise } from '../../api/workout';
 import { updateWorkoutSuccess } from '../../actions/workouts';
 import messages from '../../messages/messages';
-import makeStyles from './WorkoutsStyles';
+import makeStyles from './EditWorkoutStyles';
 
 // Functional Component
 function EditExerciseDialog({

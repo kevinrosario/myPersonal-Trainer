@@ -12,7 +12,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import { withSnackbar } from 'notistack';
 import { connect } from 'react-redux';
 import { destroyExercise } from '../../api/workout';
-import makeStyles from './WorkoutsStyles';
+import makeStyles from './EditWorkoutStyles';
 import messages from '../../messages/messages';
 import { updateWorkoutSuccess } from '../../actions/workouts';
 import EditExerciseDialog from './EditExerciseDialog';
