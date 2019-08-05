@@ -37,7 +37,7 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(initiateSignUp(credentials, history, enqueueSnackbar));
+    dispatch(initiateSignUp(credentials, setCredentials, history, enqueueSnackbar));
   };
 
   return (
@@ -62,6 +62,7 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 variant="outlined"
                 id="firstName"
                 label="First Name"
+                value={credentials.firstName}
                 onChange={handleChange('firstName')}
               />
             </Grid>
@@ -74,6 +75,7 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                value={credentials.lastName}
                 onChange={handleChange('lastName')}
               />
             </Grid>
@@ -84,8 +86,9 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 onChange={handleNumberChange('weight')}
                 type="number"
                 className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
+                InputProps={{
+                  inputProps: { min: 0 },
+                  inputabelprops: { shrink: true }
                 }}
                 margin="normal"
                 variant="outlined"
@@ -98,8 +101,9 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 onChange={handleNumberChange('height')}
                 type="number"
                 className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
+                InputProps={{
+                  inputProps: { min: 0 },
+                  inputabelprops: { shrink: true }
                 }}
                 margin="normal"
                 variant="outlined"
@@ -114,6 +118,7 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={credentials.email}
                 onChange={handleChange('email')}
               />
             </Grid>
@@ -127,6 +132,7 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={credentials.password}
                 onChange={handleChange('password')}
               />
             </Grid>
@@ -140,6 +146,7 @@ function SignUp({ history, enqueueSnackbar, dispatch }) {
                 type="password"
                 id="passwordConfirmation"
                 autoComplete="current-password"
+                value={credentials.passwordConfirmation}
                 onChange={handleChange('passwordConfirmation')}
               />
             </Grid>

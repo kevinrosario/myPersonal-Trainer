@@ -10,7 +10,7 @@ function CreateWorkoutDialog({
   history,
   dispatch,
   enqueueSnackbar,
-  createWorkoutDialogHandler,
+  createWorkoutDialogHandler
 }) {
   const [selectedExercises, setSeletectedExercises] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);

@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import SignOut from '../SignOut/SignOut';
+import Timer from '../Timer/Timer';
 import HomeScreen from '../HomeScreen/HomeScreen';
 import EditWorkout from '../EditWorkout/EditWorkout';
 import AccountConfiguration from '../AccountConfiguration/AccountConfiguration';
@@ -18,7 +19,11 @@ function App() {
         <Header>
           <Route exact path="/sign-in" component={SignIn} />
           <Route exact path="/sign-up" component={SignUp} />
-          <AuthenticatedRoute exact path="/sign-out" component={SignOut} />
+          <AuthenticatedRoute
+            exact
+            path="/sign-out"
+            component={SignOut}
+          />
           <AuthenticatedRoute
             exact
             path="/account-configuration"
@@ -27,12 +32,17 @@ function App() {
           <AuthenticatedRoute
             exact
             path="/home"
-            render={() => <HomeScreen />}
+            component={HomeScreen}
           />
           <AuthenticatedRoute
             exact
             path="/edit-workout/:id"
             render={() => <EditWorkout />}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/workout-timer/:id"
+            render={() => <Timer />}
           />
         </Header>
       </SnackbarProvider>

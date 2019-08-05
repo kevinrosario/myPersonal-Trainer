@@ -27,7 +27,7 @@ function SignIn({ dispatch, enqueueSnackbar, history }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(initiateSignIn(credentials, enqueueSnackbar, history));
+    dispatch(initiateSignIn(credentials, setCredentials, enqueueSnackbar, history));
   };
 
   return (
@@ -51,6 +51,7 @@ function SignIn({ dispatch, enqueueSnackbar, history }) {
             label="Email Address"
             name="email"
             autoComplete="email"
+            value={credentials.email}
             onChange={handleChange('email')}
           />
           <TextField
@@ -63,6 +64,7 @@ function SignIn({ dispatch, enqueueSnackbar, history }) {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={credentials.password}
             onChange={handleChange('password')}
           />
           <Button

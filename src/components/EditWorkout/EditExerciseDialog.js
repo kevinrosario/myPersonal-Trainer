@@ -54,26 +54,35 @@ function EditExerciseDialog({
             <TextField
               id="sets"
               label="Sets"
-              value={exercise.sets}
               type="number"
-              onChange={handleChange('sets')}
               margin="normal"
+              value={exercise.sets}
+              onChange={handleChange('sets')}
+              InputProps={{
+                inputProps: { min: 0 }
+              }}
             />
             <TextField
               id="repetions"
               label="Repetions"
-              value={exercise.repetions}
               type="number"
-              onChange={handleChange('repetions')}
               margin="normal"
+              value={exercise.repetions}
+              onChange={handleChange('repetions')}
+              InputProps={{
+                inputProps: { min: 0 }
+              }}
             />
             <TextField
               id="restTime"
               label="Rest Time (seconds)"
-              value={exercise.restTime}
               type="number"
-              onChange={handleChange('restTime')}
               margin="normal"
+              value={exercise.restTime}
+              onChange={handleChange('restTime')}
+              InputProps={{
+                inputProps: { min: 0 }
+              }}
             />
           </div>
         </DialogContent>

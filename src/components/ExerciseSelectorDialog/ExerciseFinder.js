@@ -10,6 +10,7 @@ import { withSnackbar } from 'notistack';
 import { muscles, equipments, categories } from './apiConstants';
 import { getExercises } from '../../api/workout';
 import makeStyles from './DialogStyles';
+import messages from '../../messages/messages';
 
 // Functional Component
 function ExerciseFinder({ enqueueSnackbar, setExerciseList }) {
@@ -38,7 +39,10 @@ function ExerciseFinder({ enqueueSnackbar, setExerciseList }) {
           setExerciseList(response.data.results);
         }
       })
-      .catch(console.error);
+      .catch((error) => {
+        enqueueSnackbar(messages.somethingFailed, { variant: 'error' });
+        console.error(error);
+      });
   };
 
   return (

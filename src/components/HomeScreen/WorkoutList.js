@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import makeStyles from './WorkoutListStyles';
 
 // Functional Component
-function WorkoutList({ workouts, exercisesDialogHandler }) {
+function WorkoutList({ workouts, createWorkoutDialogHandler }) {
   const classes = makeStyles();
 
   const workoutsArr = workouts.map((workout) => {
@@ -37,7 +37,7 @@ function WorkoutList({ workouts, exercisesDialogHandler }) {
           <Fab
             aria-label="start"
             component={Link}
-            to="/workout-timer"
+            to={`/workout-timer/${workout._id}`}
             onClick={() => {}}
             size="small"
             className={classes.edit}
@@ -68,7 +68,7 @@ function WorkoutList({ workouts, exercisesDialogHandler }) {
           </List>
         </div>
       </Container>
-      <Fab color="primary" aria-label="Add" className={classes.add} onClick={exercisesDialogHandler}>
+      <Fab color="primary" aria-label="Add" className={classes.add} onClick={createWorkoutDialogHandler}>
         <AddIcon />
       </Fab>
     </Fragment>

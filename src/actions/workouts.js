@@ -41,10 +41,11 @@ export const initiateWorkoutCreation = (
   return createWorkout(selectedExercises, user)
     .then((response) => {
       dispatch(workoutCreationSuccess(response));
-      history.push(`/edit-workout/${response.data.workout._id}`);
-      enqueueSnackbar(messages.workoutCreated, { variant: 'success' });
+      dialogHandler();
+      return response;
     })
-    .then(dialogHandler)
+    .then(response => history.push(`/edit-workout/${response.data.workout._id}`))
+    .then(() => enqueueSnackbar(messages.workoutCreated, { variant: 'success' }))
     .catch((error) => {
       enqueueSnackbar(messages.createFailed, { variant: 'error' });
       dispatch(workoutCreationFailure());

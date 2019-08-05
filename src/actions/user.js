@@ -17,7 +17,12 @@ const signInFailure = () => ({
   type: 'SIGNIN_FAILURE'
 });
 
-export const initiateSignIn = (credentials, enqueueSnackbar, history) => (dispatch) => {
+export const initiateSignIn = (
+  credentials,
+  setCredentials,
+  enqueueSnackbar,
+  history
+) => (dispatch) => {
   dispatch(signInRequest());
   return signIn(credentials)
     .then((response) => {
@@ -29,6 +34,8 @@ export const initiateSignIn = (credentials, enqueueSnackbar, history) => (dispat
     .catch(() => {
       dispatch(signInFailure());
       dispatch(workoutsRequestFailure());
+      setCredentials({ email: '', password: '' });
+      enqueueSnackbar(messages.signInFailure, { variant: 'error' });
     });
 };
 
@@ -45,7 +52,12 @@ const signUpFailure = () => ({
   type: 'SIGNUP_FAILURE'
 });
 
-export const initiateSignUp = (credentials, history, enqueueSnackbar) => (dispatch) => {
+export const initiateSignUp = (
+  credentials,
+  setCredentials,
+  history,
+  enqueueSnackbar
+) => (dispatch) => {
   dispatch(signUpRequest());
   return signUp(credentials)
     .then(() => {
@@ -59,7 +71,17 @@ export const initiateSignUp = (credentials, history, enqueueSnackbar) => (dispat
         .then(() => history.push('/home'))
         .catch(() => dispatch(signInFailure()));
     })
-    .catch(() => dispatch(signUpFailure()));
+    .catch(() => {
+      dispatch(signUpFailure());
+      enqueueSnackbar(messages.signUpFailure, { variant: 'error' });
+      setCredentials({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+      });
+    });
 };
 
 const changePasswordRequest = () => ({
