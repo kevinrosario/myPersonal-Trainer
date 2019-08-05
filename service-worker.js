@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/mypersonal-trainer/precache-manifest.df2b1d27a0df802145bfd79e6189a055.js"
+  "/mypersonal-trainer/precache-manifest.d88b561f49c8cea0055cd3b2bf6e3696.js"
 );
 
 self.addEventListener('message', (event) => {
