@@ -41,7 +41,7 @@ function EditWorkout({
   useEffect(() => {
     const work = workouts.find(stateWorkout => stateWorkout._id === match.params.id);
     setWorkout(work);
-  }, []);
+  }, [workout]);
 
   const handleChange = name => (event) => {
     setWorkout({ ...workout, [name]: event.target.value });

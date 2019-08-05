@@ -61,7 +61,7 @@ const updateWorkoutFailure = () => ({
   type: 'UPDATE_WORKOUT_FAILURE'
 });
 
-const updateWorkoutSuccess = response => ({
+export const updateWorkoutSuccess = response => ({
   type: 'UPDATE_WORKOUT_SUCCESS',
   workout: response.data.workout
 });
@@ -82,6 +82,7 @@ export const initiateUpdateWorkout = (
     });
 };
 
+// Destroy actions
 const destroyWorkoutRequest = () => ({
   type: 'DESTROY_WORKOUT_REQUEST'
 });
