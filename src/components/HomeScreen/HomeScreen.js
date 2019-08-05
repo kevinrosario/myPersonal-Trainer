@@ -4,20 +4,20 @@ import WorkoutList from '../Workouts/WorkoutList';
 import CreateWorkoutDialog from '../Workouts/CreateWorkoutDialog';
 
 function HomeScreen() {
-  const [exercisesDialog, setCreateWorkoutDialog] = useState(false);
+  const [createWorkoutDialog, setCreateWorkoutDialog] = useState(false);
 
-  const exercisesDialogHandler = () => {
-    setCreateWorkoutDialog(!exercisesDialog);
+  const createWorkoutDialogHandler = () => {
+    setCreateWorkoutDialog(!createWorkoutDialog);
   };
 
   return (
     <Fragment>
       {/* Set exercise dialog */}
-      {exercisesDialog
-        ? <CreateWorkoutDialog open exercisesDialogHandler={exercisesDialogHandler} />
+      {createWorkoutDialog
+        ? <CreateWorkoutDialog open createWorkoutDialogHandler={createWorkoutDialogHandler} />
         : ''}
       {/* Set workout list */}
-      <WorkoutList exercisesDialogHandler={exercisesDialogHandler} />
+      <WorkoutList createWorkoutDialogHandler={createWorkoutDialogHandler} />
     </Fragment>
   );
 }

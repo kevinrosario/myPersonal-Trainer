@@ -17,21 +17,21 @@ import makeStyles from './WorkoutsStyles';
 // Functional Component
 function EditExerciseDialog({
   user,
+  dispatch,
   exercise,
   setExercise,
-  editExerciseDialogHandler,
-  dispatch,
-  enqueueSnackbar,
   workout,
-  setWorkout
+  setWorkout,
+  enqueueSnackbar,
+  editExerciseDialogHandler
 }) {
   const classes = makeStyles();
 
   const handleSave = () => {
     updateExercise(exercise, user, workout._id)
       .then((response) => {
-        dispatch(updateWorkoutSuccess(response));
         enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' });
+        dispatch(updateWorkoutSuccess(response));
         setWorkout(response.data.workout);
       })
       .then(editExerciseDialogHandler)

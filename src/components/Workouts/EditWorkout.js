@@ -30,11 +30,11 @@ function EditWorkout({
   history
 }) {
   const [workout, setWorkout] = useState(null);
-  const [exercisesDialog, setCreateWorkoutDialog] = useState(false);
+  const [addExercisesDialog, setAddExerciseDialog] = useState(false);
   const classes = makeStyles();
 
   const addExerciseDialogHandler = () => {
-    setCreateWorkoutDialog(!exercisesDialog);
+    setAddExerciseDialog(!addExercisesDialog);
   };
 
   // Set exercise from state on component mount
@@ -42,7 +42,7 @@ function EditWorkout({
   useEffect(() => {
     const work = workouts.find(stateWorkout => stateWorkout._id === match.params.id);
     setWorkout(work);
-  }, [workout]);
+  }, []);
 
   const handleChange = name => (event) => {
     setWorkout({ ...workout, [name]: event.target.value });
@@ -108,7 +108,7 @@ function EditWorkout({
         </div>
       </Container>
       {/* Dialog to add more exercises */}
-      {exercisesDialog
+      {addExercisesDialog
         ? (
           <AddExerciseDialog
             open
@@ -134,7 +134,7 @@ function EditWorkout({
     </Fragment>
   );
 }
-// {exercisesDialog
+// {addExercisesDialog
 //   ? ()
 //   : ''}
 // Add to each exercise and link to timer

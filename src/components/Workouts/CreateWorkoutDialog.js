@@ -6,12 +6,11 @@ import { initiateWorkoutCreation } from '../../actions/workouts';
 import ExerciseSelectorDialog from '../ExerciseSelectorDialog/ExerciseSelectorDialog';
 
 function CreateWorkoutDialog({
-  dispatch,
-  exercisesDialogHandler,
   user,
   history,
+  dispatch,
   enqueueSnackbar,
-  dialogHandler
+  createWorkoutDialogHandler,
 }) {
   const [selectedExercises, setSeletectedExercises] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
@@ -22,7 +21,7 @@ function CreateWorkoutDialog({
       user,
       history,
       enqueueSnackbar,
-      dialogHandler
+      createWorkoutDialogHandler
     ));
   };
 
@@ -33,7 +32,7 @@ function CreateWorkoutDialog({
       exerciseList={exerciseList}
       setExerciseList={setExerciseList}
       handleSubmit={handleSubmit}
-      exercisesDialogHandler={exercisesDialogHandler}
+      exercisesDialogHandler={createWorkoutDialogHandler}
     />
   );
 }

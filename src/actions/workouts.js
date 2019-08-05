@@ -74,7 +74,7 @@ export const initiateUpdateWorkout = (
   dispatch(updateWorkoutRequest());
   return updateWorkout(workout, user)
     .then(response => dispatch(updateWorkoutSuccess(response)))
-    .then(() => enqueueSnackbar(messages.deletedSuccessfully, { variant: 'success' }))
+    .then(() => enqueueSnackbar(messages.updatedSuccessfully, { variant: 'success' }))
     .catch((error) => {
       enqueueSnackbar(messages.updateFailed, { variant: 'error' });
       dispatch(updateWorkoutFailure());

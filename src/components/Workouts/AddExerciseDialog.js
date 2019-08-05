@@ -8,9 +8,8 @@ import { createMultipleExercises } from '../../api/workout';
 import ExerciseSelectorDialog from '../ExerciseSelectorDialog/ExerciseSelectorDialog';
 
 function AddExerciseDialog({
-  exercisesDialogHandler,
-  dispatch,
   user,
+  dispatch,
   workout,
   setWorkout,
   enqueueSnackbar,
@@ -23,9 +22,12 @@ function AddExerciseDialog({
     createMultipleExercises(selectedExercises, user)
       .then((response) => {
         // add response exercises to workout
+        setWorkout({ ...workout, exercises: [...workout.exercises, ...response.data.exercises] });
+        return response;
+      })
+      .then((response) => {
+        // update workout in database.
         workout.exercises.push(...response.data.exercises);
-        // update workout
-        setWorkout(response.data.workout);
         dispatch(initiateUpdateWorkout(
           workout,
           user,
@@ -46,7 +48,7 @@ function AddExerciseDialog({
       exerciseList={exerciseList}
       setExerciseList={setExerciseList}
       handleSubmit={handleSubmit}
-      exercisesDialogHandler={exercisesDialogHandler}
+      exercisesDialogHandler={addExerciseDialogHandler}
     />
   );
 }

@@ -19,10 +19,10 @@ import EditExerciseDialog from './EditExerciseDialog';
 
 function EditExerciseList({
   user,
-  enqueueSnackbar,
-  dispatch,
   workout,
-  setWorkout
+  setWorkout,
+  dispatch,
+  enqueueSnackbar
 }) {
   // I need to re-render component when store changes, so I created this until something comes.
   const [editExerciseDialog, setEditExercisesDialog] = useState(false);
@@ -36,13 +36,13 @@ function EditExerciseList({
   const handleDestroy = (exercise, workoutID) => {
     destroyExercise(exercise, user, workoutID)
       .then((response) => {
-        setWorkout(response.data.workout);
-        dispatch(updateWorkoutSuccess(response));
         enqueueSnackbar(messages.deletedSuccessfully, { variant: 'error' });
+        dispatch(updateWorkoutSuccess(response));
+        setWorkout(response.data.workout);
       })
       .catch((error) => {
-        console.error(error);
         enqueueSnackbar(messages.somethingFailed, { variant: 'error' });
+        console.error(error);
       });
   };
 

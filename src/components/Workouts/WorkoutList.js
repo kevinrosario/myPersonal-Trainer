@@ -74,14 +74,6 @@ function WorkoutList({ workouts, exercisesDialogHandler }) {
   );
 }
 
-// const exerciseArr = [...workout.exercises]
-// const exercise = exerciseArr.shift()
-// setWorkoutTemplate(workout)
-// setUnfinishedExercises([...exerciseArr])
-// setCurrentExercise(exercise)
-// setRestTime(exercise.restTime)
-// setSets(exercise.sets)
-
 const mapStateToProps = state => ({ workouts: state.workouts });
 
 export default withRouter(connect(mapStateToProps)(WorkoutList));

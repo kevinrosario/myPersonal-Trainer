@@ -10,10 +10,10 @@ import ExerciseList from './ExerciseList';
 
 // Will be used for creating a workout and updating one
 function ExerciseSelectorDialog({
-  exercisesDialogHandler,
   selectedExercises,
   setSeletectedExercises,
   handleSubmit,
+  exercisesDialogHandler
 }) {
   const [exerciseList, setExerciseList] = useState([]);
 
