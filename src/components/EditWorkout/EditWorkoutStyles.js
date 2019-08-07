@@ -72,5 +72,16 @@ export default makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  editExercise: {
+    marginRight: theme.spacing(1),
+    backgroundColor: ''
+  },
+  deleteExercise: {
+    color: 'white',
+    backgroundColor: '#a60510',
+    '&:hover': {
+      backgroundColor: '#c20a16',
+    }
   }
 }));

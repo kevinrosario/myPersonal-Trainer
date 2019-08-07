@@ -60,7 +60,7 @@ function EditExerciseList({
       </ListItemText>
       <ListItemSecondaryAction>
         <Fab
-          className={classes.fab}
+          className={classes.editExercise}
           aria-label="Edit Exercise"
           size="small"
           onClick={() => {
@@ -71,7 +71,7 @@ function EditExerciseList({
           <EditIcon />
         </Fab>
         <Fab
-          className={classes.fab}
+          className={classes.deleteExercise}
           aria-label="Delete Exercise"
           size="small"
           onClick={() => {
