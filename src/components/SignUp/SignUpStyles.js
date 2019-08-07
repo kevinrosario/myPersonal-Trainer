@@ -13,18 +13,22 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: '#90C3C8',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 100,
+  },
+  submit: {
+    backgroundColor: '#1F5673',
+    margin: theme.spacing(3, 0, 2),
+    '&:hover': {
+      backgroundColor: '#113b52',
+    }
   }
 }));
 

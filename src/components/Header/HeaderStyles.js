@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   appBar: {
+    backgroundColor: '#1F5673',
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`

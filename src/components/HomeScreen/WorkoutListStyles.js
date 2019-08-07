@@ -25,7 +25,11 @@ export default makeStyles(theme => ({
     right: 20,
     bottom: 20,
     left: 'auto',
-    position: 'fixed'
+    position: 'fixed',
+    backgroundColor: '#1F5673',
+    '&:hover': {
+      backgroundColor: '#113b52',
+    }
   },
   form: {
     width: '100%',
@@ -36,7 +40,11 @@ export default makeStyles(theme => ({
     width: '100%'
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#1F5673',
+    '&:hover': {
+      backgroundColor: '#113b52',
+    }
   },
   typography: {
     padding: theme.spacing(2)

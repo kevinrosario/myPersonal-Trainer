@@ -41,8 +41,18 @@ export default makeStyles(theme => ({
   typography: {
     padding: theme.spacing(2)
   },
-  fab: {
-    marginRight: 5
+  deleteIcon: {
+    marginRight: 5,
+    backgroundColor: '#a60510',
+    '&:hover': {
+      backgroundColor: '#c20a16',
+    }
+  },
+  addIcon: {
+    backgroundColor: '#113b52',
+    '&:hover': {
+      backgroundColor: '#1F5673',
+    }
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -62,9 +72,5 @@ export default makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
   }
 }));

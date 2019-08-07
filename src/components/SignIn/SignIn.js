@@ -64,6 +64,7 @@ function SignIn({ dispatch, enqueueSnackbar, history }) {
             type="password"
             id="password"
             autoComplete="current-password"
+            className={classes.textField}
             value={credentials.password}
             onChange={handleChange('password')}
           />

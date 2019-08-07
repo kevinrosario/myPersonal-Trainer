@@ -26,6 +26,10 @@ export default makeStyles(theme => ({
     width: '100%'
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#1F5673',
+    '&:hover': {
+      backgroundColor: '#113b52',
+    }
   }
 }));

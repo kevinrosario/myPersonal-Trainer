@@ -91,6 +91,7 @@ function AccountConfiguration({
           </Button>
           <Button
             onClick={handleSubmit}
+            className={classes.submit}
             type="submit"
             variant="contained"
             color="primary"

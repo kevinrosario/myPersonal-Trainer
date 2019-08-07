@@ -116,14 +116,19 @@ function EditWorkout({
         : ''}
       <div className={classes.add}>
         <Fab
-          aria-label="Delete Exercise"
-          className={classes.fab}
+          aria-label="Delete Workout"
+          className={classes.deleteIcon}
           color="secondary"
           onClick={handleDestroy}
         >
           <DeleteIcon />
         </Fab>
-        <Fab aria-label="Add Exercise" color="primary" onClick={addExerciseDialogHandler}>
+        <Fab
+          aria-label="Add Exercise"
+          color="primary"
+          onClick={addExerciseDialogHandler}
+          className={classes.addIcon}
+        >
           <AddIcon />
         </Fab>
       </div>
