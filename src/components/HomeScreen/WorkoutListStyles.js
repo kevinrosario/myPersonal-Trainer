@@ -19,6 +19,13 @@ export default makeStyles(theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper
   },
+  edit: {
+    color: 'white',
+    backgroundColor: '#23a829',
+    '&:hover': {
+      backgroundColor: '#1a7d1e',
+    }
+  },
   add: {
     margin: 0,
     top: 'auto',
