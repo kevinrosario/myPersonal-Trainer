@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2dff6d9a7905703df9eacec7ca4563c9",
+    "revision": "f45777f256c582c6d688c0cb97357f29",
     "url": "/mypersonal-trainer/index.html"
   },
   {
-    "revision": "be339d9ad1aacc41d8c5",
+    "revision": "b58da261bc0d6c8449b4",
     "url": "/mypersonal-trainer/static/css/main.f8ca22bb.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mypersonal-trainer/static/js/2.66e1c1e9.chunk.js"
   },
   {
-    "revision": "be339d9ad1aacc41d8c5",
-    "url": "/mypersonal-trainer/static/js/main.0f3d489b.chunk.js"
+    "revision": "b58da261bc0d6c8449b4",
+    "url": "/mypersonal-trainer/static/js/main.0756ba36.chunk.js"
   },
   {
     "revision": "1ce775b0a6f0acc90870",

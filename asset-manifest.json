@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/mypersonal-trainer/static/css/main.f8ca22bb.chunk.css",
-    "main.js": "/mypersonal-trainer/static/js/main.0f3d489b.chunk.js",
-    "main.js.map": "/mypersonal-trainer/static/js/main.0f3d489b.chunk.js.map",
+    "main.js": "/mypersonal-trainer/static/js/main.0756ba36.chunk.js",
+    "main.js.map": "/mypersonal-trainer/static/js/main.0756ba36.chunk.js.map",
     "runtime~main.js": "/mypersonal-trainer/static/js/runtime~main.ba16c41b.js",
     "runtime~main.js.map": "/mypersonal-trainer/static/js/runtime~main.ba16c41b.js.map",
     "static/js/2.66e1c1e9.chunk.js": "/mypersonal-trainer/static/js/2.66e1c1e9.chunk.js",
     "static/js/2.66e1c1e9.chunk.js.map": "/mypersonal-trainer/static/js/2.66e1c1e9.chunk.js.map",
     "index.html": "/mypersonal-trainer/index.html",
-    "precache-manifest.9328b1317cbec0e753bd8bb41dc0f3f7.js": "/mypersonal-trainer/precache-manifest.9328b1317cbec0e753bd8bb41dc0f3f7.js",
+    "precache-manifest.8da9830dbf170684e0439674de3d8984.js": "/mypersonal-trainer/precache-manifest.8da9830dbf170684e0439674de3d8984.js",
     "service-worker.js": "/mypersonal-trainer/service-worker.js",
     "static/css/main.f8ca22bb.chunk.css.map": "/mypersonal-trainer/static/css/main.f8ca22bb.chunk.css.map"
   }
